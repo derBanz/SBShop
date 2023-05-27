@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-address-list',
@@ -12,7 +12,11 @@ export class AddressListComponent implements OnInit {
   clientId: String | undefined;
   clientName: String | undefined;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -29,6 +33,28 @@ export class AddressListComponent implements OnInit {
         this.addresses = data.addresses.map((address: any) => {
           return { ...address };
         });
+      });
+  }
+
+  createAddress() {
+    this.router.navigate(['./create'], { relativeTo: this.route });
+  }
+
+  editAddress(address: any) {
+    this.router.navigate([
+      '/clients/' + this.clientId + '/addresses/' + address.id + '/update',
+    ]);
+  }
+
+  deleteAddress(address: any) {
+    this.http
+      .delete('http://localhost:8080/address/' + address.id)
+      .subscribe((s) => {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['clients/' + this.clientId + '/addresses']);
+          });
       });
   }
 }

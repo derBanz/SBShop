@@ -3,6 +3,7 @@ package resources;
 import jakarta.ws.rs.*;
 import data.DataInitializer;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 
 @Path("/init-data")
 public class DataInitializationResource {
@@ -11,8 +12,8 @@ public class DataInitializationResource {
     DataInitializer dataInitializer;
 
     @POST
-    public String initializeData() {
+    public Response initializeData() {
         dataInitializer.initData();
-        return "Data initialization completed";
+        return Response.ok().entity("{\"value\": \"Data initialized.\"}").build();
     }
 }

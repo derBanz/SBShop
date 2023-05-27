@@ -11,9 +11,10 @@ public class Address extends PanacheEntity {
 
     @JsonBackReference
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
 
     private String street;
@@ -29,14 +30,13 @@ public class Address extends PanacheEntity {
     }
 
     // Full constructor
-    public Address(Client client, String street, String houseNumber, String zipCode, String city, String country) {
-        this.client = client;
+    public Address(Long clientId, String street, String houseNumber, String zipCode, String city, String country) {
+        this.clientId = clientId;
         this.street = street;
         this.houseNumber = houseNumber;
         this.zipCode = zipCode;
         this.city = city;
         this.country = country;
-        this.clientId = client.getId();
     }
 
     // Getters and setters
@@ -50,9 +50,7 @@ public class Address extends PanacheEntity {
     public Client getClient() {
         return client;
     }
-    public void setClient(Client client) {
-        this.client = client;
-    }
+    public void setClient(Client client) { this.client = client; }
 
     public List<Purchase> getPurchases() {
         return purchases;

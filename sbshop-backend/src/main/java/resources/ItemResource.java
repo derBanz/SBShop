@@ -4,7 +4,7 @@ import jakarta.ws.rs.*;
 import model.Item;
 import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
 
-@Path("/items")
+@Path("/item")
 public interface ItemResource extends PanacheEntityResource<Item, Long> {
 
 }

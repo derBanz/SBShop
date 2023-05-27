@@ -79,7 +79,7 @@ public class AddressInitializer {
 
         for (List<String> name : addressNames) {
             Client client = clients.get((int)Math.floor(Math.random() * (clients.size())));
-            Address address = new Address( client, name.get(0), name.get(1), name.get(2), name.get(3), name.get(4) );
+            Address address = new Address( client.getId(), name.get(0), name.get(1), name.get(2), name.get(3), name.get(4) );
             addresses.add(address);
         }
 

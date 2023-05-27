@@ -33,6 +33,26 @@ export class ClientListComponent implements OnInit {
     });
   }
 
+  createClient() {
+    this.router.navigate(['/clients/create']);
+  }
+
+  editClient(client: any) {
+    this.router.navigate(['/clients/' + client.id + '/update']);
+  }
+
+  deleteClient(client: any) {
+    this.http
+      .delete('http://localhost:8080/client/' + client.id)
+      .subscribe((s) => {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() => {
+            this.router.navigate(['/clients']);
+          });
+      });
+  }
+
   toggleClient(client: any) {
     this.clients.forEach((c) => {
       if (c !== client) {

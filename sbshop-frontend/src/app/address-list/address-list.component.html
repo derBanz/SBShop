@@ -1,7 +1,10 @@
 <div class="main">
   <h2>Address List - {{ clientName }}</h2>
+  <button (click)="createAddress()" class="Create">Create</button>
   <div *ngFor="let address of addresses" class="details">
     {{ address.street }} {{ address.houseNumber }}, {{ address.zipCode }}
     {{ address.city }}, {{ address.country }}
+    <button (click)="editAddress(address)" class="listButton">Edit</button>
+    <button (click)="deleteAddress(address)" class="listButton">Delete</button>
   </div>
 </div>
