@@ -1,0 +1,20 @@
+<div class="main">
+  <h2>Client List</h2>
+  <button (click)="createClient()" class="Create">Create</button>
+  <div
+    *ngFor="let client of clients"
+    [class.active]="client.isActive"
+    (click)="toggleClient(client)"
+    class="details"
+  >
+    {{ client.title }} {{ client.name }} {{ client.surname }} ({{
+      client.dateOfBirth
+    }})
+    <button (click)="editClient(client)" class="listButton">Edit</button>
+    <button (click)="deleteClient(client)" class="listButton">Delete</button>
+    <div class="buttons" *ngIf="client.isActive">
+      <button (click)="navigateToPurchases(client.id)">Purchases</button>
+      <button (click)="navigateToAddresses(client.id)">Addresses</button>
+    </div>
+  </div>
+</div>

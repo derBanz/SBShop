@@ -1,0 +1,92 @@
+html,
+body {
+  background-color: #f0f8ff;
+  margin: 0;
+  padding: 0;
+}
+
+.date {
+  font-size: small;
+}
+
+.preview {
+  max-height: 15em;
+  overflow-y: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Courier New", Courier, monospace;
+  color: #70bcff;
+}
+
+p,
+label,
+.helptext {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+}
+
+.menu {
+  background-color: #b0daff;
+  width: 100%;
+  display: grid;
+  column-gap: 2.5%;
+  padding: 10px 10% 10px 10%;
+  grid-template-columns: 15% 15% 15% 15% 15%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.menu-link {
+  font-weight: normal;
+  text-decoration: none;
+  color: black;
+}
+
+.menu-item {
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.menu-welcome {
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.main {
+  width: 50%;
+  margin: 0 auto;
+  padding: 80px 25px 120px 25px;
+}
+
+.details {
+  padding: 6px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+}
+
+.listButton {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+li.active {
+  height: 50px;
+}

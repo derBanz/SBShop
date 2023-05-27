@@ -1,0 +1,68 @@
+<div class="main">
+  <h2>Edit Article</h2>
+  <form (ngSubmit)="submitForm()" #articleForm="ngForm">
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        [(ngModel)]="article.name"
+      />
+    </div>
+    <div>
+      <label for="length">Length:</label>
+      <input
+        type="number"
+        id="length"
+        name="length"
+        required
+        [(ngModel)]="article.length"
+      />
+    </div>
+    <div>
+      <label for="width">Width:</label>
+      <input
+        type="number"
+        id="width"
+        name="width"
+        required
+        [(ngModel)]="article.width"
+      />
+    </div>
+    <div>
+      <label for="height">Height:</label>
+      <input
+        type="number"
+        id="height"
+        name="height"
+        required
+        [(ngModel)]="article.height"
+      />
+    </div>
+    <div>
+      <label for="price">Price:</label>
+      <input
+        type="number"
+        id="price"
+        name="price"
+        required
+        [(ngModel)]="article.price"
+      />
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea
+        type="text"
+        id="description"
+        name="description"
+        [(ngModel)]="article.description"
+      ></textarea>
+    </div>
+    <div class="buttons">
+      <button type="button" (click)="cancel()">Cancel</button>
+      <button type="submit" [disabled]="!articleForm.form.valid">Submit</button>
+    </div>
+  </form>
+</div>
