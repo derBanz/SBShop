@@ -1,6 +1,8 @@
 package model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
@@ -23,9 +25,7 @@ public class Article extends PanacheEntity {
     }
 
     // Full constructor
-    public Article(Long id, List<Item> items, String name, double height, double width, double length, String description, double price) {
-        this.id = id;
-        this.items = items;
+    public Article(String name, double height, double width, double length, String description, double price) {
         this.name = name;
         this.height = height;
         this.width = width;

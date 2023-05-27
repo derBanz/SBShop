@@ -3,11 +3,13 @@ package model;
 import jakarta.persistence.*;
 import java.util.List;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "ADDRESS")
 public class Address extends PanacheEntity {
 
+    @JsonBackReference
     @ManyToOne
     private Client client;
 
@@ -17,9 +19,9 @@ public class Address extends PanacheEntity {
     private String street;
     private String houseNumber;
     private String zipCode;
+    private String city;
     private String country;
-    private String type;
-    private long clientId;
+    private Long clientId;
 
 
     // Default constructor for hibernate
@@ -27,15 +29,13 @@ public class Address extends PanacheEntity {
     }
 
     // Full constructor
-    public Address(Long id, Client client, List<Purchase> purchases, String street, String houseNumber, String zipCode, String country, String type) {
-        this.id = id;
+    public Address(Client client, String street, String houseNumber, String zipCode, String city, String country) {
         this.client = client;
-        this.purchases = purchases;
         this.street = street;
         this.houseNumber = houseNumber;
         this.zipCode = zipCode;
+        this.city = city;
         this.country = country;
-        this.type = type;
         this.clientId = client.getId();
     }
 
@@ -82,6 +82,13 @@ public class Address extends PanacheEntity {
         this.zipCode = zipCode;
     }
 
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -89,17 +96,10 @@ public class Address extends PanacheEntity {
         this.country = country;
     }
 
-    public String getType() {
-        return type;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public long getClientId() {
+    public Long getClientId() {
         return clientId;
     }
-    public void setClientId(long clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 }

@@ -1,1 +1,7 @@
-<p>address-list works!</p>
+<div class="main">
+  <h2>Address List - {{ clientName }}</h2>
+  <div *ngFor="let address of addresses" class="details">
+    {{ address.street }} {{ address.houseNumber }}, {{ address.zipCode }}
+    {{ address.city }}, {{ address.country }}
+  </div>
+</div>

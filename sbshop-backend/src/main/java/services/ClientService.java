@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import model.Client;
 import repositories.ClientRepository;
 
+import java.util.List;
+
 @ApplicationScoped
 public class ClientService {
 
@@ -13,7 +15,14 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     @Transactional
-    public Client createClient(Client client) {
+    public List<Client> createClients(List<Client> clients) {
+        for (Client client : clients) {
+            clientRepository.persist(client);
+        }
+        return clients;
+    }
+
+    private Client createClient(Client client) {
         clientRepository.persist(client);
         return client;
     }

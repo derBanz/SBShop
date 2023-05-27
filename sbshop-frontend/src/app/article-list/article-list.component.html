@@ -1,1 +1,12 @@
-<p>article-list works!</p>
+<div class="main">
+  <h2>Article List</h2>
+  <button (click)="createArticle()" class="Create">Create</button>
+  <div *ngFor="let article of articles" class="details">
+    "{{ article.name }}": {{ article.length }}cm x {{ article.width }}cm x
+    {{ article.height }}cm (LxWxH) - {{ article.price }}€
+    <button (click)="editArticle(article)" class="listButton">Edit</button>
+    <button (click)="deleteArticle(article)" class="listButton">Delete</button
+    ><br />
+    {{ article.description }}
+  </div>
+</div>

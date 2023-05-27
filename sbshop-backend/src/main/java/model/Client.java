@@ -25,12 +25,9 @@ public class Client extends PanacheEntity {
     }
 
     // Full constructor
-    public Client(Long id, List<Address> addresses, List<Purchase> purchases, String name, String surname, String title, Date dateOfBirth) {
-        this.id = id;
-        this.addresses = addresses;
-        this.purchases = purchases;
-        this.name = name;
+    public Client(String surname, String name, String title, Date dateOfBirth) {
         this.surname = surname;
+        this.name = name;
         this.title = title;
         this.dateOfBirth = dateOfBirth;
     }
