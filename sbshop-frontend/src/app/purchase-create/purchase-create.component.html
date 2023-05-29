@@ -1,1 +1,25 @@
-<p>purchase-create works!</p>
+<div class="main">
+  <h2>New Purchase</h2>
+  <form (ngSubmit)="submitForm(true)" #purchaseForm="ngForm">
+    <div *ngFor="let article of articles" class="details">
+      <label for="article.name"
+        >"{{ article.name }}": {{ article.length }}cm x {{ article.width }}cm x
+        {{ article.height }}cm (LxWxH) - {{ article.price }}€
+      </label>
+      <input
+        type="number"
+        id="count"
+        name="count"
+        required
+        [(ngModel)]="article.count"
+      />
+    </div>
+    <div class="buttons">
+      <button type="button" (click)="cancel()">Cancel</button>
+      <button type="button" (click)="submitForm(false)">Save & Back</button>
+      <button type="submit" [disabled]="!purchaseForm.form.valid">
+        Confirm
+      </button>
+    </div>
+  </form>
+</div>

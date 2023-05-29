@@ -1,10 +1,32 @@
 package resources;
 
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
 import model.Item;
-import io.quarkus.hibernate.orm.rest.data.panache.PanacheEntityResource;
+import services.ItemService;
+
+import java.util.List;
 
 @Path("/item")
-public interface ItemResource extends PanacheEntityResource<Item, Long> {
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class ItemResource {
 
+    @Inject
+    ItemService itemService;
+
+    @POST
+    @Transactional
+    public List<Item> add(String articles) {
+        List<Item> items = itemService.createItems(articles);
+        return items;
+    }
+
+    @PUT
+    @Transactional
+    public List<Item> update(String articles) {
+        return itemService.updateItems(articles);
+    }
 }

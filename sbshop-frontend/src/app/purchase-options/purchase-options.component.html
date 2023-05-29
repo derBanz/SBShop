@@ -1,0 +1,62 @@
+<div class="main">
+  <h2>Finalize Purchase</h2>
+  <form (ngSubmit)="submitForm(true)" #purchaseForm="ngForm">
+    <div class="details">
+      <label for="paymentMethod">Payment Method</label>
+      <select
+        id="paymentMethod"
+        name="paymentMethod"
+        [(ngModel)]="purchase.paymentMethod"
+        required
+      >
+        <option value="">Select Payment Type</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Transfer">Direct Debit</option>
+        <option value="PayPal">PayPal</option>
+      </select>
+    </div>
+    <div class="details">
+      <label for="address">Address</label>
+      <select
+        id="address"
+        name="address"
+        [(ngModel)]="purchase.addressId"
+        required
+      >
+        <option value="">Select Address</option>
+        <option *ngFor="let address of addresses" [value]="address.id">
+          {{ address.street }} / {{ address.city }}, {{ address.country }}
+        </option>
+      </select>
+    </div>
+    <div class="details">
+      <label for="deliveryType">Delivery Type</label>
+      <select
+        id="deliveryType"
+        name="deliveryType"
+        [(ngModel)]="purchase.deliveryType"
+        required
+      >
+        <option value="">Select Delivery Type</option>
+        <option value="Normal">Normal</option>
+        <option value="Express">Express</option>
+      </select>
+    </div>
+    <div class="details">
+      <label for="isGift">Is Gift</label>
+      <input
+        type="checkbox"
+        id="isGift"
+        name="isGift"
+        [(ngModel)]="purchase.isGift"
+      />
+    </div>
+    <div class="buttons">
+      <button type="button" (click)="cancel()">Cancel</button>
+      <button type="button" (click)="submitForm(false)">Save & Back</button>
+      <button type="submit" [disabled]="!purchaseForm.form.valid">
+        Confirm Order
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
@@ -7,9 +8,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Table(name = "ITEM")
 public class Item extends PanacheEntity {
 
+    @JsonBackReference("defaultPurchase")
     @ManyToOne
     private Purchase purchase;
 
+    @JsonBackReference("defaultArticle")
     @ManyToOne
     private Article article;
 
@@ -22,11 +25,10 @@ public class Item extends PanacheEntity {
     }
 
     // Full constructor
-    public Item(Long id, Purchase purchase, Article article, double price) {
-        this.id = id;
+    public Item(Purchase purchase, Article article) {
         this.purchase = purchase;
         this.article = article;
-        this.price = price;
+        this.price = article.getPrice();
         this.purchaseId = purchase.getId();
         this.articleId = article.getId();
     }
@@ -56,8 +58,8 @@ public class Item extends PanacheEntity {
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
+    public void setPrice() {
+        this.price = this.article.getPrice();
     }
 
     public long getPurchaseId() {

@@ -6,3 +6,7 @@ quarkus.datasource.password=
 
 # Hibernate
 quarkus.hibernate-orm.database.generation=drop-and-create
+
+# Prevent CORS issues
+quarkus.http.cors=true
+quarkus.http.cors.origins=

@@ -1,13 +1,15 @@
 package resources;
 
-import io.vertx.core.json.Json;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import model.Address;
+import model.Client;
+import repositories.ClientRepository;
 import services.AddressService;
+import services.ClientService;
 
 @Path("/address")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -15,6 +17,8 @@ import services.AddressService;
 public class AddressResource {
     @Inject
     AddressService addressService;
+    @Inject
+    ClientRepository clientRepository;
 
     @GET
     public List<Address> get() {
@@ -27,10 +31,16 @@ public class AddressResource {
         return addressService.getAddress(addressId);
     }
 
+    @GET
+    @Path("/client/{clientId}")
+    public List<Address> get(@PathParam("clientId") Long clientId) {
+        Client client = clientRepository.findById(clientId);
+        return client.getAddresses();
+    }
+
     @POST
-    public List<Address> add(Address address) {
-        addressService.createAddress(address);
-        return addressService.getAddresses();
+    public Address add(Address address) {
+        return addressService.createAddress(address);
     }
 
     @PUT

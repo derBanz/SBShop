@@ -1,1 +1,41 @@
-<p>purchase-list works!</p>
+<div class="main">
+  <h2>Purchase List - {{ clientName }}</h2>
+  <button (click)="createPurchase()" class="Create">Create</button>
+  <div *ngFor="let purchase of purchases" class="details">
+    <p *ngIf="purchase.isConfirmed">
+      {{ purchase.timeOfPurchase }} {{ purchase.deliveryType }}
+      {{ purchase.paymentMethod }} {{ purchase.isGift }} {{ purchase.price }}€
+    </p>
+    <p *ngIf="!purchase.isConfirmed">
+      Pending | Current value: {{ purchase.price }}€
+    </p>
+    <button
+      (click)="confirmPurchase(purchase)"
+      class="listButton"
+      *ngIf="!purchase.isConfirmed"
+    >
+      Confirm
+    </button>
+    <button
+      (click)="readPurchase(purchase)"
+      class="listButton"
+      *ngIf="purchase.isConfirmed"
+    >
+      Read
+    </button>
+    <button
+      (click)="editPurchase(purchase)"
+      class="listButton"
+      *ngIf="!purchase.isConfirmed"
+    >
+      Edit
+    </button>
+    <button
+      (click)="cancelPurchase(purchase)"
+      class="listButton"
+      *ngIf="!purchase.isConfirmed"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
