@@ -12,7 +12,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 public class Article extends PanacheEntity {
 
     @JsonManagedReference("defaultArticle")
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items;
 
     private String name;

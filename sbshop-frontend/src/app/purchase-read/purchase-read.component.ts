@@ -38,7 +38,7 @@ export class PurchaseReadComponent implements OnInit {
       .subscribe((response: any) => {
         this.purchaseTime = this.datePipe.transform(
           response['timeOfPurchase'],
-          'dd. MMM yyyy hh:mm'
+          'dd. MMM yyyy HH:mm'
         );
         this.purchasePrice = response['price'];
       });

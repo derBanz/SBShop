@@ -37,7 +37,7 @@ export class PurchaseListComponent implements OnInit {
         this.purchases = data.purchases.map((purchase: any) => {
           const formattedDate = this.datePipe.transform(
             purchase.timeOfPurchase,
-            'dd. MMM yyyy hh:mm'
+            'dd. MMM yyyy HH:mm'
           );
           return { ...purchase, timeOfPurchase: formattedDate };
         });
@@ -93,5 +93,9 @@ export class PurchaseListComponent implements OnInit {
             this.router.navigate([this.url]);
           });
       });
+  }
+
+  goBack() {
+    this.router.navigate(['/clients']);
   }
 }

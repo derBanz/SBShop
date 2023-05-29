@@ -57,4 +57,8 @@ export class AddressListComponent implements OnInit {
           });
       });
   }
+
+  goBack() {
+    this.router.navigate(['/clients/']);
+  }
 }

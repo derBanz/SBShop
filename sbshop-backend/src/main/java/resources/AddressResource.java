@@ -9,7 +9,6 @@ import model.Address;
 import model.Client;
 import repositories.ClientRepository;
 import services.AddressService;
-import services.ClientService;
 
 @Path("/address")
 @Consumes(MediaType.APPLICATION_JSON)
