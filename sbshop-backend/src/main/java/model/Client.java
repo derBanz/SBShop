@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -9,9 +10,11 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Table(name = "CLIENT")
 public class Client extends PanacheEntity {
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Address> addresses;
 
+    @JsonManagedReference("defaultClient")
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
 

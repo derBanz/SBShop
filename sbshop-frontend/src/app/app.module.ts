@@ -19,6 +19,8 @@ import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientUpdateComponent } from './client-update/client-update.component';
 import { PurchaseCreateComponent } from './purchase-create/purchase-create.component';
 import { PurchaseUpdateComponent } from './purchase-update/purchase-update.component';
+import { PurchaseOptionsComponent } from './purchase-options/purchase-options.component';
+import { PurchaseReadComponent } from './purchase-read/purchase-read.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { PurchaseUpdateComponent } from './purchase-update/purchase-update.compo
     ClientUpdateComponent,
     PurchaseCreateComponent,
     PurchaseUpdateComponent,
+    PurchaseOptionsComponent,
+    PurchaseReadComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [DatePipe],

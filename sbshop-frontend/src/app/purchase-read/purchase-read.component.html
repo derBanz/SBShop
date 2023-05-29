@@ -1,0 +1,13 @@
+<div class="main">
+  <h2>Item List - Purchase at {{ purchaseTime }}</h2>
+  <div *ngFor="let article of articlesActive" class="details">
+    <p>
+      {{ article.name }} {{ article.quantity }} {{ article.price }}€ -
+      {{ article.price * article.quantity }}€
+    </p>
+  </div>
+  <div>
+    <p>Total: {{ purchasePrice }}€</p>
+  </div>
+  <button (click)="goBack()" class="listButton">Back</button>
+</div>

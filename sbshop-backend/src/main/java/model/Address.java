@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
@@ -14,6 +15,7 @@ public class Address extends PanacheEntity {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @JsonManagedReference("defaultAddress")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "address", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
 

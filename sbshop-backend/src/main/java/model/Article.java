@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,7 +11,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 @Table(name = "ARTICLE")
 public class Article extends PanacheEntity {
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    @JsonManagedReference("defaultArticle")
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Item> items;
 
     private String name;

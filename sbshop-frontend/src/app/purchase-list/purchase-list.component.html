@@ -1,1 +1,64 @@
-<p>purchase-list works!</p>
+<div class="main">
+  <h2>Purchase List - {{ clientName }}</h2>
+  <button (click)="createPurchase()" class="Create">Create</button>
+  <div *ngFor="let purchase of purchases" class="details">
+    <p *ngIf="purchase.isConfirmed">
+      {{ purchase.timeOfPurchase }}
+      <img
+        *ngIf="purchase.deliveryType === 'Normal'"
+        src="../../assets/purchase/deliveryType_free.png"
+        height="20"
+        style="margin-right: 10px"
+        alt="Normal Delivery"
+      />
+      <img
+        *ngIf="purchase.deliveryType === 'Express'"
+        src="../../assets/purchase/deliveryType_express.png"
+        height="20"
+        style="margin-right: 10px"
+        alt="Express Delivery"
+      />
+      <img
+        *ngIf="purchase.paymentMethod === 'Credit Card'"
+        src="../../assets/purchase/paymentMethod_creditCard.png"
+        height="20"
+        style="margin-right: 10px"
+        alt="Credit Card"
+      />
+      <img
+        *ngIf="purchase.paymentMethod === 'Transfer'"
+        src="../../assets/purchase/paymentMethod_directDebit.svg"
+        height="20"
+        style="margin-right: 10px"
+        alt="Direct Debit"
+      />
+      <img
+        *ngIf="purchase.paymentMethod === 'PayPal'"
+        src="../../assets/purchase/paymentMethod_payPal.png"
+        height="20"
+        style="margin-right: 10px"
+        alt="PayPal"
+      />
+      <img
+        *ngIf="purchase.isGift"
+        src="../../assets/purchase/isGift.png"
+        height="20"
+        style="margin-right: 10px"
+        alt="isGift"
+      />
+      {{ purchase.price }}€
+      <button (click)="readPurchase(purchase)" class="listButton">Read</button>
+    </p>
+    <p *ngIf="!purchase.isConfirmed">
+      Pending | Current value: {{ purchase.price }}€
+      <button (click)="confirmPurchase(purchase)" class="listButton">
+        Confirm
+      </button>
+      <button (click)="editPurchase(purchase)" class="listButton">Edit</button>
+      <button (click)="cancelPurchase(purchase)" class="listButton">
+        Cancel
+      </button>
+    </p>
+  </div>
+  <button (click)="goBack()" class="listButton">Back</button>
+</div>

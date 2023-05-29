@@ -11,6 +11,10 @@ import { ClientListComponent } from './client-list/client-list.component';
 import { ClientCreateComponent } from './client-create/client-create.component';
 import { ClientUpdateComponent } from './client-update/client-update.component';
 import { PurchaseListComponent } from './purchase-list/purchase-list.component';
+import { PurchaseCreateComponent } from './purchase-create/purchase-create.component';
+import { PurchaseUpdateComponent } from './purchase-update/purchase-update.component';
+import { PurchaseOptionsComponent } from './purchase-options/purchase-options.component';
+import { PurchaseReadComponent } from './purchase-read/purchase-read.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -21,6 +25,22 @@ const routes: Routes = [
   { path: 'clients/create', component: ClientCreateComponent },
   { path: 'clients/:clientId/update', component: ClientUpdateComponent },
   { path: 'clients/:clientId/purchases', component: PurchaseListComponent },
+  {
+    path: 'clients/:clientId/purchases/create',
+    component: PurchaseCreateComponent,
+  },
+  {
+    path: 'clients/:clientId/purchases/:purchaseId/update',
+    component: PurchaseUpdateComponent,
+  },
+  {
+    path: 'clients/:clientId/purchases/:purchaseId/options',
+    component: PurchaseOptionsComponent,
+  },
+  {
+    path: 'clients/:clientId/purchases/:purchaseId/read',
+    component: PurchaseReadComponent,
+  },
   { path: 'clients/:clientId/addresses', component: AddressListComponent },
   {
     path: 'clients/:clientId/addresses/create',

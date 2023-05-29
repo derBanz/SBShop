@@ -1,24 +1,39 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+import helper.LocalDateTimeSerializer;
+
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "PURCHASE")
 public class Purchase extends PanacheEntity {
 
+    @JsonBackReference("defaultClient")
     @ManyToOne
     private Client client;
 
+    @JsonBackReference("defaultAddress")
     @ManyToOne
     private Address address;
 
-    private LocalDate timeOfPurchase;
+    @JsonManagedReference("defaultPurchase")
+    @OneToMany(mappedBy = "purchase",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval= true)
+    private List<Item> items;
+
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    private LocalDateTime timeOfPurchase;
     private String deliveryType;
     private String paymentMethod;
     private Boolean isGift;
-    private Boolean isCompleted;
+    private Boolean isConfirmed;
+    private double price;
     private long clientId;
     private long addressId;
 
@@ -27,17 +42,14 @@ public class Purchase extends PanacheEntity {
     }
 
     // Full constructor
-    public Purchase(Long id, Client client, Address address, LocalDate timeOfPurchase, String deliveryType, String paymentMethod, Boolean isGift, Boolean isCompleted) {
+    public Purchase(Long id, Long clientId, String deliveryType, String paymentMethod, Boolean isGift, Boolean isConfirmed) {
         this.id = id;
-        this.client = client;
-        this.address = address;
-        this.timeOfPurchase = timeOfPurchase;
+        this.clientId = clientId;
         this.deliveryType = deliveryType;
         this.paymentMethod = paymentMethod;
         this.isGift = isGift;
-        this.isCompleted = isCompleted;
-        this.clientId = client.getId();
-        this.addressId = address.getId();
+        this.isConfirmed = isConfirmed;
+        this.price = 0.0;
     }
 
     // Getters and setters
@@ -55,6 +67,32 @@ public class Purchase extends PanacheEntity {
         this.client = client;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+    public List<Item> getArticleItems(Article article) {
+        return this.items.stream().filter(item -> item.getArticle() == article).collect(Collectors.toList());
+    }
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price ){
+        this.price = price;
+    }
+
+    public void setPrice(List<Item> items) {
+        double p = 0.0;
+        for (Item item:items){
+            p += item.getPrice();
+        }
+        p = Math.round(p*100)/100.0;
+        this.price = p;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -62,11 +100,11 @@ public class Purchase extends PanacheEntity {
         this.address = address;
     }
 
-    public LocalDate getTimeOfPurchase() {
+    public LocalDateTime getTimeOfPurchase() {
         return timeOfPurchase;
     }
-    public void setTimeOfPurchase(LocalDate timeOfPurchase) {
-        this.timeOfPurchase = timeOfPurchase;
+    public void setTimeOfPurchase() {
+        this.timeOfPurchase = LocalDateTime.now();
     }
 
     public String getDeliveryType() {
@@ -83,18 +121,18 @@ public class Purchase extends PanacheEntity {
         this.paymentMethod = paymentMethod;
     }
 
-    public Boolean getGift() {
+    public Boolean getIsGift() {
         return isGift;
     }
-    public void setGift(Boolean gift) {
-        isGift = gift;
+    public void setIsGift(Boolean isGift) {
+        this.isGift = isGift;
     }
 
-    public Boolean getCompleted() {
-        return isCompleted;
+    public Boolean getIsConfirmed() {
+        return isConfirmed;
     }
-    public void setCompleted(Boolean completed) {
-        isCompleted = completed;
+    public void setIsConfirmed(Boolean isConfirmed) {
+        this.isConfirmed = isConfirmed;
     }
 
     public long getClientId() {
